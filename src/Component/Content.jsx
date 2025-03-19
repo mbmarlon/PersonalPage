@@ -11,17 +11,17 @@ const Content = ({ activeCategory }) => {
     },
     {
       id: 2,
-      category: "VFX",
-      title: "VFX Image",
+      category: "Characters",
+      title: "biped Rig",
       type: "video",
-      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+      path: "/portfolioIMG/Characters/Bipedo Rigg Y Prueba De Animación.mp4",
     },
     {
       id: 3,
       category: "Animation",
       title: "Animation Image",
       type: "video",
-      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+      path: "/portfolioIMG/Animation/Reel3D2024MarlonMarin.mp4",
     },
     {
       id: 4,
@@ -70,7 +70,7 @@ const Content = ({ activeCategory }) => {
       <div className="grid">
         {filteredItems.map((item) => (
           <div key={item.id} className="PortfItem">
-            <div className="overlay">
+            <div className="">
               <h2>{item.title}</h2>
             </div>
             <video className="video" controls src={item.path}></video>

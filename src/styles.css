@@ -127,11 +127,11 @@ a {
   color: var(--BGPage);
 }
 .grid {
-  background-color: aqua;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   padding: 0% 10%;
+  text-align: center;
 }
 .overlay {
   position: absolute;
