@@ -32,7 +32,9 @@ nav {
   margin-bottom: 2rem;
   font-weight: 600;
 }
+
 /* Textos */
+
 h1,
 .CvT {
   margin: 0%;
@@ -72,6 +74,7 @@ a {
   color: var(--GrayColor);
   text-decoration-line: none;
 }
+
 .fontThin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
@@ -124,10 +127,33 @@ a {
   color: var(--BGPage);
 }
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  padding: 0 2rem;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0% 10%;
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 20px;
+  padding: 20%;
+  text-align: center;
+}
+.PortfItem {
+  margin: 16px 16px;
+}
+
+/* Multimedia */
+.video {
+  max-width: 200px;
 }
 
 .navigation {

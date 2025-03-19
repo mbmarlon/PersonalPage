@@ -2,14 +2,62 @@ import React, { useState } from "react";
 
 const Content = ({ activeCategory }) => {
   const items = [
-    { id: 1, category: "Characters", label: "Character Image" },
-    { id: 2, category: "VFX", label: "VFX Image" },
-    { id: 3, category: "Animation", label: "Animation Image" },
-    { id: 4, category: "UX/UI", label: "UX/UI Image" },
-    { id: 5, category: "ADS", label: "ADS Image" },
-    { id: 6, category: "WEB", label: "WEB Image" },
-    { id: 7, category: "Characters", label: "Another Character Image" },
-    { id: 8, category: "Animation", label: "Another Animation Image" },
+    {
+      id: 1,
+      category: "Characters",
+      title: "Character Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
+    {
+      id: 2,
+      category: "VFX",
+      title: "VFX Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
+    {
+      id: 3,
+      category: "Animation",
+      title: "Animation Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
+    {
+      id: 4,
+      category: "UX/UI",
+      title: "UX/UI Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
+    {
+      id: 5,
+      category: "ADS",
+      title: "ADS Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
+    {
+      id: 6,
+      category: "WEB",
+      title: "WEB Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
+    {
+      id: 7,
+      category: "Characters",
+      title: "Another Character Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
+    {
+      id: 8,
+      category: "Animation",
+      title: "Another Animation Image",
+      type: "video",
+      path: "/portfolioIMG/Animation/Rain Dance 2.mp4",
+    },
   ];
 
   const filteredItems =
@@ -21,8 +69,11 @@ const Content = ({ activeCategory }) => {
     <>
       <div className="grid">
         {filteredItems.map((item) => (
-          <div key={item.id} className="image-box">
-            {item.label}
+          <div key={item.id} className="PortfItem">
+            <div className="overlay">
+              <h2>{item.title}</h2>
+            </div>
+            <video className="video" controls src={item.path}></video>
           </div>
         ))}
       </div>
