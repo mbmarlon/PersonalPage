@@ -130,17 +130,15 @@ a {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 0% 0%;
   text-align: center;
+  margin: 5%;
 }
 .PortfItem {
-  margin: 16px 16px;
 }
 
 /* Multimedia */
 .video {
-  max-width: 200px;
+  max-width: 500px;
 }
 
 .navigation {
