@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/*VAriables*/
+
+:root {
+  --Interes: #fd982e;
+  --BGPage: #191919;
+  --GrayColor: #9e9e9e;
+}
+.App {
+  margin: 0%;
+}
+body {
+  font-family: Poppins;
+  background-color: var(--BGPage);
+  color: var(--GrayColor);
+}
+header {
+  margin-top: 20%;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
+  font-weight: 900;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+/* Textos */
+h1,
+.CvT {
+  margin: 0%;
+  padding: 0%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 1.6rem;
+}
+h2,
+.SubT {
+  margin: 0%;
+  padding: 0%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.2rem;
+}
+h3,
+.SubT2 {
+  margin: 0%;
+  padding: 0%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1.2rem;
+}
+p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+  line-height: 24px;
+  text-align: justify;
+}
+a {
+  color: var(--GrayColor);
+  text-decoration-line: none;
+}
+.fontThin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 1.2rem;
+}
+.TxCenter {
+  text-align: center;
+}
+
+/* Colores */
+
+.orange {
+  color: var(--Interes);
+}
+.gray {
+  color: var(--GrayColor);
+}
+.white {
+  color: #fff;
+}
+.black {
+  color: var(--BGPage);
+}
+
+/* Prtfolio */
+
+.active {
+  color: var(--Interes);
+  border-bottom: 2px solid var(--Interes);
+}
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.category button {
+  background-color: aqua;
+  background-color: var(--BGPage);
+  color: var(--GrayColor);
+  border: 1px solid var(--Interes);
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.category button.active {
+  background-color: var(--Interes);
+  color: var(--BGPage);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.circle {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* CV */
+
+.CvSection {
+  margin: 10%;
+  padding: 32px 0%;
+  border-top: 2px solid var(--GrayColor);
+}
+.CvItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.CvItems2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.CVitem {
+  padding: 0% 3% 0% 3%;
+}
+.ExpCont {
+  margin-left: 5%;
+}
+.WorkCont {
+  display: flex;
+  flex-direction: column;
+  padding: 2% 0%;
+  line-height: 22px;
+}
+
+/* Contact */
+
+.formCont {
+  margin: 0% 10%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.FrmInput {
+  outline: hidden;
+  margin: 3%;
+  padding: 8px 0%;
+  color: var(--GrayColor);
+  background-color: var(--BGPage);
+  border: hidden;
+  border-bottom: 1px solid var(--GrayColor);
+}
+input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--Interes);
+  padding: 8px 5%;
+}
+textarea:focus {
+  border-bottom: 1px solid var(--Interes);
+  outline: none;
+  padding: 8px 5%;
+}
+.ContSection {
+  margin: 10%;
+  text-align: center;
+}
+.button {
+  background-color: var(--Interes);
+  border-radius: 9px;
+  border: none;
+  padding: 5px;
+  margin-top: 33px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* footer */
+.footer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: var(--Interes);
+  padding: 5%;
+  text-align: center;
+  margin-top: 10%;
+  bottom: 0;
+}
+.footer p {
+  margin: 0;
+  color: var(--BGPage);
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background-color: #ff8c32;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  color: white;
+  margin: 5%;
+  padding: 3% 6%;
+}
+
+.popup-button {
+  background-color: var(--BGPage);
+  color: var(--GrayColor);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
