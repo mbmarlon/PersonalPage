@@ -5,9 +5,30 @@ const Content = ({ activeCategory }) => {
     {
       id: 1,
       category: "Animation",
-      title: "Another Animation Image",
+      title: "Animation Reel",
       type: "video",
       path: "/portfolioIMG/Animation/Reel3D2024MarlonMarin.mp4",
+    },
+    {
+      id: 9,
+      category: "VFX",
+      title: "VFX Reel",
+      type: "video",
+      path: "/portfolioIMG/VFX/Reel Vfx 2024.mp4",
+    },
+    {
+      id: 10,
+      category: "VFX",
+      title: "Gracias por todo",
+      type: "video",
+      path: "/portfolioIMG/VFX/Rafik - Gracias Por Todo.mp4",
+    },
+    {
+      id: 11,
+      category: "VFX",
+      title: "Palmeras en el jardín",
+      type: "video",
+      path: "/portfolioIMG/VFX/Alejandro Saenz - Palmera En El Jardín.mp4",
     },
     {
       id: 2,
@@ -57,27 +78,6 @@ const Content = ({ activeCategory }) => {
       title: "Retrofuturistic car",
       type: "video",
       path: "/portfolioIMG/Characters/Vehículo Retrofuturista.mp4",
-    },
-    {
-      id: 9,
-      category: "VFX",
-      title: "Reel VFX 2024",
-      type: "video",
-      path: "/portfolioIMG/VFX/Reel Vfx 2024.mp4",
-    },
-    {
-      id: 10,
-      category: "VFX",
-      title: "Gracias por todo",
-      type: "video",
-      path: "/portfolioIMG/VFX/Rafik - Gracias Por Todo.mp4",
-    },
-    {
-      id: 11,
-      category: "VFX",
-      title: "Palmeras en el jardín",
-      type: "video",
-      path: "/portfolioIMG/VFX/Alejandro Saenz - Palmera En El Jardín.mp4",
     },
   ];
 
