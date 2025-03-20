@@ -183,19 +183,41 @@ a {
 }
 
 /* CV */
+.CvRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0% 1%;
+}
 
 .CvSection {
-  margin: 10%;
   padding: 32px 0%;
   border-top: 2px solid var(--GrayColor);
+  padding: 5%;
+  max-width: 500px;
+  min-width: 200px;
+  margin: 30px;
 }
+
 .CvItems {
   display: flex;
   flex-direction: column;
+  text-align: center;
   align-items: center;
   padding-left: 10%;
   padding-right: 10%;
 }
+@media screen and (max-width: 1100px) {
+  .CvSection {
+    padding: 32px 0%;
+    border-top: 2px solid var(--GrayColor);
+    padding: 5%;
+    max-width: 300px;
+    min-width: 200px;
+    margin: 20px;
+  }
+}
+
 .CvItems2 {
   display: flex;
   flex-direction: row;
@@ -207,6 +229,37 @@ a {
 .CVitem {
   padding: 0% 3% 0% 3%;
 }
+
+/* CV < 800 */
+@media screen and (max-width: 800px) {
+  .CvSection {
+    padding: 32px 0%;
+    border-top: 2px solid var(--GrayColor);
+    margin: 5% 10%;
+  }
+
+  .CvItems {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .CvItems2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .CVitem {
+    padding: 0% 3% 0% 3%;
+  }
+}
+
+/* Contact */
 .ExpCont {
   margin-left: 5%;
 }
@@ -216,8 +269,6 @@ a {
   padding: 2% 0%;
   line-height: 22px;
 }
-
-/* Contact */
 
 .formCont {
   margin: 0% 10%;
