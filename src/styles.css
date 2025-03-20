@@ -156,9 +156,9 @@ a {
 }
 @media screen and (max-width: 600px) {
   .column {
-    -ms-flex: 40%;
-    flex: 40%;
-    max-width: 40%;
+    -ms-flex: 46%;
+    flex: 46%;
+    max-width: 46%;
   }
 }
 
