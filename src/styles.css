@@ -112,6 +112,7 @@ a {
   gap: 1rem;
   margin-bottom: 2rem;
 }
+
 .category button {
   background-color: aqua;
   background-color: var(--BGPage);
@@ -126,18 +127,47 @@ a {
   color: var(--BGPage);
 }
 .grid {
-  display: flex;
+  display: -ms-flexbox;
   justify-content: center;
+  display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  text-align: center;
-  margin: 5%;
+  padding: 0% 4px;
 }
-.PortfItem {
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 10%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 30%;
+    flex: 30%;
+    max-width: 30%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 40%;
+    flex: 40%;
+    max-width: 40%;
+  }
 }
 
 /* Multimedia */
-.video {
-  max-width: 500px;
+.column video {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
 }
 
 .navigation {

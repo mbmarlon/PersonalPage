@@ -89,12 +89,17 @@ const Content = ({ activeCategory }) => {
   return (
     <>
       <div className="grid">
-        {filteredItems.map((item) => (
-          <div key={item.id} className="PortfItem">
-            <div className="">
-              <h2>{item.title}</h2>
-            </div>
-            <video className="video" controls src={item.path}></video>
+        {[0, 1, 2, 3].map((colIndex) => (
+          <div key={colIndex} className="column">
+            {filteredItems
+              .filter((_, index) => index % 4 === colIndex) // Distribute items across 4 columns
+              .map((item) => (
+                <div key={item.id} className="PortfItem">
+                  {item.type === "video" && (
+                    <video controls src={item.path}></video>
+                  )}
+                </div>
+              ))}
           </div>
         ))}
       </div>

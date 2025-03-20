@@ -16,7 +16,7 @@ const Category = () => {
 
   return (
     <>
-      <div className="category">
+      <div className="category ">
         {categories.map((category) => (
           <button
             key={category}
