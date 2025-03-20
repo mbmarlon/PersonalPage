@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import profileImg from "./Profile.jpeg";
 const Curriculum = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
 
@@ -128,7 +129,7 @@ const Curriculum = () => {
       <div className="CvRow">
         <div>
           <section id="profile" className="CvSection">
-            <img src="/portfolioIMG/Profile.png" alt="profile image" />
+            <img src={profileImg} alt="profile image" className="imgProfile" />
             <h1>Marlon Marin Barco</h1>
             <p className="text-gray-300 text-sm mb-4">
               Multimedia engineering, UX/UI, 3D animator, 3D generalist, VFX
