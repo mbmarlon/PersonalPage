@@ -79,6 +79,46 @@ const Content = ({ activeCategory }) => {
       type: "video",
       path: "/portfolioIMG/Characters/Vehículo Retrofuturista.mp4",
     },
+    {
+      id: 12,
+      category: "UX/UI",
+      title: "App de Gastos",
+      type: "img",
+      path: "/portfolioIMG/UX-UI/Presentación.png",
+      pdf: "",
+    },
+    {
+      id: 13,
+      category: "UX/UI",
+      title: "BabyToo",
+      type: "img",
+      path: "/portfolioIMG/UX-UI/Landing.png",
+      pdf: "",
+    },
+    {
+      id: 14,
+      category: "UX/UI",
+      title: "CreserFeliz",
+      type: "img",
+      path: "/portfolioIMG/UX-UI/Creser proyecto.png",
+      pdf: "",
+    },
+    {
+      id: 15,
+      category: "UX/UI",
+      title: "Fox Cafe",
+      type: "img",
+      path: "/portfolioIMG/UX-UI/Fox Cafe.png",
+      pdf: "",
+    },
+    {
+      id: 16,
+      category: "UX/UI",
+      title: "Mi primer ahorro",
+      type: "img",
+      path: "/portfolioIMG/UX-UI/Producto financiero para niños.webp",
+      pdf: "",
+    },
   ];
 
   const filteredItems =
@@ -97,6 +137,9 @@ const Content = ({ activeCategory }) => {
                 <div key={item.id} className="PortfItem">
                   {item.type === "video" && (
                     <video controls src={item.path}></video>
+                  )}
+                  {item.type === "img" && (
+                    <img className="img" src={item.path} />
                   )}
                 </div>
               ))}

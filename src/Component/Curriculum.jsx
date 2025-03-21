@@ -129,14 +129,18 @@ const Curriculum = () => {
       <div className="CvRow">
         <div>
           <section id="profile" className="CvSection">
-            <img src={profileImg} alt="profile image" className="imgProfile" />
-            <h1>Marlon Marin Barco</h1>
-            <p className="text-gray-300 text-sm mb-4">
-              Multimedia engineering, UX/UI, 3D animator, 3D generalist, VFX
-              artist and web developer.
-            </p>
-
-            {/* Botones */}
+            <div className="JCCenter">
+              <img
+                src={profileImg}
+                alt="profile image"
+                className="imgProfile"
+              />
+              <h1>Marlon Marin Barco</h1>
+              <p className="text-gray-300 text-sm mb-4">
+                Multimedia engineering, UX/UI, 3D animator, 3D generalist, VFX
+                artist and web developer.
+              </p>
+            </div>
             <div className="flex space-x-4 mt-4">
               <div className="w-6 h-6 bg-orange-500 rounded-full"></div>
               <div className="w-6 h-6 bg-orange-500 rounded-full"></div>
