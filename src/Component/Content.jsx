@@ -84,7 +84,7 @@ const Content = ({ activeCategory }) => {
       category: "UX/UI",
       title: "App de Gastos",
       type: "img",
-      path: "/portfolioIMG/UX-UI/Presentación.png",
+      path: "/portfolioIMG/UX-UI/Presentación.webp",
       pdf: "",
     },
     {
@@ -92,7 +92,7 @@ const Content = ({ activeCategory }) => {
       category: "UX/UI",
       title: "BabyToo",
       type: "img",
-      path: "/portfolioIMG/UX-UI/Landing.png",
+      path: "/portfolioIMG/UX-UI/Landing.webp",
       pdf: "",
     },
     {
@@ -100,7 +100,7 @@ const Content = ({ activeCategory }) => {
       category: "UX/UI",
       title: "CreserFeliz",
       type: "img",
-      path: "/portfolioIMG/UX-UI/Creser proyecto.png",
+      path: "/portfolioIMG/UX-UI/Creser proyecto.webp",
       pdf: "",
     },
     {
@@ -108,7 +108,7 @@ const Content = ({ activeCategory }) => {
       category: "UX/UI",
       title: "Fox Cafe",
       type: "img",
-      path: "/portfolioIMG/UX-UI/Fox Cafe.png",
+      path: "/portfolioIMG/UX-UI/Fox Cafe.webp",
       pdf: "",
     },
     {
