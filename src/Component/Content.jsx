@@ -104,14 +104,6 @@ const Content = ({ activeCategory }) => {
       pdf: "",
     },
     {
-      id: 15,
-      category: "UX/UI",
-      title: "Fox Cafe",
-      type: "img",
-      path: "/portfolioIMG/UX-UI/Fox Cafe.webp",
-      pdf: "",
-    },
-    {
       id: 16,
       category: "UX/UI",
       title: "Mi primer ahorro",
@@ -134,7 +126,7 @@ const Content = ({ activeCategory }) => {
             {filteredItems
               .filter((_, index) => index % 4 === colIndex) // Distribute items across 4 columns
               .map((item) => (
-                <div key={item.id} className="PortfItem">
+                <div key={item.id} className="">
                   {item.type === "video" && (
                     <video controls src={item.path}></video>
                   )}

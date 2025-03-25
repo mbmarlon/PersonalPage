@@ -127,30 +127,38 @@ a {
   color: var(--BGPage);
 }
 .grid {
-  display: -ms-flexbox;
-  justify-content: center;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 0% 4px;
+  justify-content: center;
+  align-items: flex-start; /* Align items at the top */
+  gap: 16px; /* Space between columns */
 }
-/* Create four equal columns that sits next to each other */
+
+/* Make each column auto-size to fit the content */
 .column {
-  -ms-flex: 25%; /* IE10 */
-  flex: 10%;
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Space between items */
   max-width: 25%;
-  padding: 0 4px;
-  border: 1ps solid blue;
+  flex-wrap: wrap;
+  -ms-flex: 25%;
+  flex: 10%;
 }
-/* Responsive layout - makes a two column-layout instead of four columns */
+
+/* Images and videos take the full width of their containers */
+.column img,
+.column video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 @media screen and (max-width: 800px) {
   .column {
     -ms-flex: 30%;
     flex: 30%;
     flex-wrap: wrap;
     max-width: 30%;
-    border: 1px solid red;
+    height: auto;
   }
 }
 @media screen and (max-width: 600px) {
@@ -159,22 +167,8 @@ a {
     flex: 46%;
     flex-wrap: wrap;
     max-width: 46%;
-    border: 1pps solid yellow;
+    height: auto;
   }
-}
-
-/* Multimedia */
-.column video {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
-  height: auto;
-}
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
-  height: auto;
 }
 
 .navigation {
@@ -183,6 +177,7 @@ a {
   gap: 1rem;
   margin-top: 1rem;
 }
+
 .circle {
   width: 20px;
   height: 20px;
