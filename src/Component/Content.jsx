@@ -96,7 +96,7 @@ const Content = ({ activeCategory }) => {
       pdf: "",
     },
     {
-      id: 14,
+      id: 15,
       category: "UX/UI",
       title: "CreserFeliz",
       type: "img",
@@ -104,12 +104,60 @@ const Content = ({ activeCategory }) => {
       pdf: "",
     },
     {
-      id: 16,
+      id: 17,
       category: "UX/UI",
       title: "Mi primer ahorro",
       type: "img",
       path: "/portfolioIMG/UX-UI/Producto financiero para niños.webp",
       pdf: "",
+    },
+    {
+      id: 18,
+      category: "ADS",
+      title: "Escritorio pared",
+      type: "video",
+      path: "/portfolioIMG/ADS/Ad 590 - Escritorio De Pared (Michel) 4 5 Suscripción.mp4",
+      pdf: "",
+    },
+    {
+      id: 19,
+      category: "ADS",
+      title: "patada",
+      type: "video",
+      path: "/portfolioIMG/ADS/Ad 633 -  Shopify  Evergreen - Patada 9 16.mp4",
+      pdf: "",
+    },
+    {
+      id: 20,
+      category: "ADS",
+      title: "dispensador",
+      type: "video",
+      path: "/portfolioIMG/ADS/Ad Dispensador De Esponja 9 16.mp4",
+      pdf: "",
+    },
+    {
+      id: 21,
+      category: "WEB",
+      title: "AppGastos",
+      type: "img",
+      path: "/portfolioIMG/WEB/AppGastos.psd.webp",
+      link: "https://mmplandegastosreact.netlify.app/",
+    },
+    {
+      id: 22,
+      category: "WEB",
+      title: "Store",
+      type: "img",
+      path: "/portfolioIMG/WEB/Store.psd.webp",
+      link: "https://mmtiendadeplanetasreact.netlify.app/",
+    },
+    {
+      id: 23,
+      category: "WEB",
+      title: "Veterinaria",
+      type: "img",
+      path: "/portfolioIMG/WEB/Veterinaria.psd.webp",
+      link: "https://mmcitasdeveterinariareact.netlify.app/",
     },
   ];
 
@@ -130,9 +178,11 @@ const Content = ({ activeCategory }) => {
                   {item.type === "video" && (
                     <video controls src={item.path}></video>
                   )}
-                  {item.type === "img" && (
-                    <img className="img" src={item.path} />
-                  )}
+                  <a href={item.link} target="_blank">
+                    {item.type === "img" && (
+                      <img className="img" src={item.path} />
+                    )}
+                  </a>
                 </div>
               ))}
           </div>
