@@ -5,11 +5,11 @@ import Curriculum from "./Curriculum.jsx";
 import Contact from "./Contact.jsx";
 
 const Nav = () => {
-    const [activeLink, setActiveLink] = useState("projects");
+  const [activeLink, setActiveLink] = useState("projects");
 
-    const handleSetActive = (link) => {
-      setActiveLink(link);
-    };
+  const handleSetActive = (link) => {
+    setActiveLink(link);
+  };
 
   /*
  
@@ -39,10 +39,10 @@ const Nav = () => {
           Contact
         </a>
       </nav>
-        {activeLink === "projects" && <Proyects />}
-        {activeLink === "curriculum" && <Curriculum />}
-        {activeLink === "contact" && <Contact />}
-      </>
+      {activeLink === "projects" && <Proyects />}
+      {activeLink === "curriculum" && <Curriculum />}
+      {activeLink === "contact" && <Contact />}
+    </>
   );
 };
 export default Nav;
