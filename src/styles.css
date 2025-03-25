@@ -128,16 +128,19 @@ a {
 }
 .grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
-  align-items: flex-start; /* Align items at the top */
+  flex-wrap: wrap;
   gap: 16px; /* Space between columns */
 }
 
 /* Make each column auto-size to fit the content */
+.center {
+  justify-content: center;
+}
 .column {
+  background-color: aqua;
   display: flex;
-  flex-direction: column;
   gap: 8px; /* Space between items */
   max-width: 25%;
   flex-wrap: wrap;
