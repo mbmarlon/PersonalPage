@@ -89,12 +89,12 @@ const Curriculum = () => {
             </div>
             <div className="WorkCont">
               <h2>Kabato Lab</h2>
-              <h3>3D Generals</h3>
+              <h3>3D Generalist</h3>
               <span className="fontThin">June 2024 (1 year 6 months)</span>
             </div>
             <div className="WorkCont">
-              <h2>Freeforce</h2>
-              <h3>3D Generals and VFX</h3>
+              <h2>Red Point Producciones</h2>
+              <h3>3D Generalist and VFX</h3>
               <span className="fontThin">February 2023 (1 year 4 months)</span>
             </div>
             <div className="WorkCont">
@@ -104,17 +104,17 @@ const Curriculum = () => {
             </div>
             <div className="WorkCont">
               <h2>CACUMEN creative studio</h2>
-              <h3>Animator 2D y 3D</h3>
+              <h3> 2D and 3D Animator</h3>
               <span className="fontThin">2022 (6 months)</span>
             </div>
             <div className="WorkCont">
-              <h2>BT1 Laboratoire de Prototipado</h2>
+              <h2>BTI Laboratory of prototyping</h2>
               <h3>UV/UI Designer</h3>
               <span className="fontThin">March 2022 (7 months)</span>
             </div>
             <div className="WorkCont">
               <h2>Universidad Autónoma de Occidente</h2>
-              <h3>Auxiliar de producción</h3>
+              <h3>Production Assistant</h3>
               <span className="fontThin">2021 (1 year 9 months)</span>
             </div>
           </div>
