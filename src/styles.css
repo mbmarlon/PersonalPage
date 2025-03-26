@@ -140,7 +140,6 @@ a {
   justify-content: center;
 }
 .column {
-  background-color: aqua;
   display: flex;
   gap: 8px; /* Space between items */
   max-width: 25%;
