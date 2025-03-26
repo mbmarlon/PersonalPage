@@ -10,10 +10,6 @@ const Nav = () => {
   const handleSetActive = (link) => {
     setActiveLink(link);
   };
-
-  /*
- 
- */
   return (
     <>
       <nav>

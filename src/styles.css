@@ -106,18 +106,18 @@ a {
   border-bottom: 2px solid var(--Interes);
 }
 .category {
+  margin: 0% 5%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 0rem;
   margin-bottom: 2rem;
 }
 
 .category button {
-  background-color: aqua;
   background-color: var(--BGPage);
   color: var(--GrayColor);
-  border: 1px solid var(--Interes);
+  border: none; /*1px solid var(--Interes);*/
   padding: 0.2rem 0.5rem;
   border-radius: 10px;
   cursor: pointer;
