@@ -319,8 +319,16 @@ textarea:focus {
   padding: 8px 5%;
 }
 .ContSection {
-  margin: 10%;
+  display: flex;
+  margin: 0% 10%;
+  justify-content: center;
   text-align: center;
+}
+.ContactProfile {
+  padding: 32px 0%;
+  padding: 5%;
+  max-width: 500px;
+  min-width: 200px;
 }
 .button {
   background-color: var(--Interes);

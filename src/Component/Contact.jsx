@@ -82,7 +82,7 @@ const Contact = () => {
           </div>
         </div>
       )}*/}
-      <section id="profile" className="CvSection">
+      <section id="profile" className="ContactProfile">
         <div className="JCCenter">
           <img src={profileImg} alt="profile image" className="imgProfile" />
           <h1 className="white">Marlon Marin Barco</h1>
