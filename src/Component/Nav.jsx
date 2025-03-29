@@ -18,7 +18,7 @@ const Nav = () => {
           className={activeLink === "projects" ? "active SubT" : "SubT"}
           onClick={() => handleSetActive("projects")}
         >
-          Proyects
+          Projects
         </a>
         <a
           href="#curriculum"
