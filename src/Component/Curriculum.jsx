@@ -23,7 +23,7 @@ const Curriculum = () => {
             and 3D modeling, user interface design and web development. My main
             focus is on creating high-quality content that engages and retains
             audiences. I have worked on animation and 3D modeling projects for
-            the entertainment and advertising indusdivies, as well as on user
+            the entertainment and advertising industries, as well as on user
             interface design and website development for companies. I am
             passionate about digital art and new technologies, which drives me
             to constantly stay updated and seek new opportunities for
