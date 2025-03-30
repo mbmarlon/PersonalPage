@@ -278,17 +278,23 @@ a {
   display: inline-block;
   margin: 5px;
   padding: 5px 10px;
-  background: rgba(253, 152, 46, 0.1);
   border-radius: 5px;
   transform: scale(0.9);
   opacity: 0;
   transition: all 0.3s ease;
 }
 
+.CVitem:hover {
+  color: var(--Interes);
+  font-weight: 500;
+  transition: all 0.5s ease;
+}
+
 .CVitem.animate {
   transform: scale(1);
   opacity: 1;
-}
+} /* end*/
+
 @media screen and (max-width: 1200px) {
   .CvSection {
     padding: 32px 0%;
@@ -403,6 +409,7 @@ textarea:focus {
   justify-content: center;
   text-align: center;
 }
+
 .ContactProfile {
   padding: 32px 0%;
   padding: 5%;
@@ -513,5 +520,9 @@ textarea:focus {
 }
 .icon {
   margin: 20px;
+  width: 100%;
   color: var(--Interes);
+}
+#profile a:hover {
+  color: #fff;
 }
