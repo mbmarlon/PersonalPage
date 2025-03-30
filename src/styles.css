@@ -10,11 +10,16 @@
 .App {
   margin: 0%;
 }
+
+/*html*/
+html {
+}
 body {
   margin: 0%;
   font-family: Poppins;
   background-color: var(--BGPage);
   color: var(--GrayColor);
+  scroll-behavior: smooth;
 }
 header {
   margin-left: 10%;
@@ -30,6 +35,39 @@ nav {
   gap: 2rem;
   margin-bottom: 2rem;
   font-weight: 600;
+}
+/*Nav aniamtion*/
+nav a {
+  transition: transform 0.2s ease;
+}
+
+nav a:hover {
+  transform: translateY(-3px);
+  color: var(--Interes);
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--Interes);
+  transition: width 0.3s ease;
+}
+
+nav a.active {
+  animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* Textos */
@@ -99,7 +137,7 @@ a {
   color: var(--BGPage);
 }
 
-/* Prtfolio */
+/* Projects */
 
 .active {
   color: var(--Interes);
@@ -122,9 +160,18 @@ a {
   border-radius: 10px;
   cursor: pointer;
 }
+/*Category animation*/
 .category button.active {
   background-color: var(--Interes);
   color: var(--BGPage);
+}
+.category button.active:hover {
+  color: var(--BGPage);
+}
+.category button:hover {
+  transition: all 0.3s ease;
+  transform: scale(1.2);
+  color: var(--Interes);
 }
 .grid {
   display: flex;
@@ -155,6 +202,8 @@ a {
   width: 100%;
   height: auto;
 }
+
+/*Responsive css*/
 @media screen and (max-width: 800px) {
   .grid {
     margin: 0% 5%;
@@ -179,18 +228,11 @@ a {
     height: auto;
   }
 }
-
 .navigation {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
-}
-
-.circle {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
 }
 
 /* CV */
@@ -209,7 +251,20 @@ a {
   min-width: 200px;
   margin: 30px;
 }
+/* CV Section animation */
+.CvSection {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 
+.CvSection.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*end off nomation*/
+/* CV items*/
 .CvItems {
   display: flex;
   flex-direction: column;
@@ -217,6 +272,22 @@ a {
   align-items: center;
   padding-left: 10%;
   padding-right: 10%;
+}
+/*CV items animation*/
+.CVitem {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  background: rgba(253, 152, 46, 0.1);
+  border-radius: 5px;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.CVitem.animate {
+  transform: scale(1);
+  opacity: 1;
 }
 @media screen and (max-width: 1200px) {
   .CvSection {
@@ -247,6 +318,14 @@ a {
   border-radius: 100%;
   margin: 14px;
   cursor: pointer;
+  transition: all 0.5s ease;
+  filter: grayscale(30%);
+}
+
+.imgProfile:hover {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+  box-shadow: 0 0 20px rgba(253, 152, 46, 0.5);
 }
 
 /* CV < 800 */
@@ -338,6 +417,45 @@ textarea:focus {
   margin-top: 33px;
   font-size: 16px;
   cursor: pointer;
+}
+/*Contact animations*/
+.ExpCont {
+  position: relative;
+}
+
+.ExpCont::before {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: var(--Interes);
+}
+
+.WorkCont {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease;
+}
+
+.WorkCont::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--Interes);
+}
+
+.WorkCont.animate {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* footer */
