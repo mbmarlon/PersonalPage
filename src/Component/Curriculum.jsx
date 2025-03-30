@@ -1,22 +1,92 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import profileImg from "./Profile.jpeg";
 const Curriculum = () => {
+  /* Responsive */
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
 
+  // Handle resize for mobile detection
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 800);
     };
+
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  /* Animation */
+  const sectionsRef = useRef([]);
+  const skillItemsRef = useRef([]);
+  const workItemsRef = useRef([]);
+
+  // Intersection Observer for animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    // Section observer
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate");
+        }
+      });
+    }, observerOptions);
+
+    // Work items observer (for timeline)
+    const workObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate");
+          entry.target.style.transitionDelay = `${index * 0.1}s`;
+        }
+      });
+    }, observerOptions);
+
+    // Skill items observer
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate");
+          entry.target.style.transitionDelay = `${index * 0.05}s`;
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements
+    sectionsRef.current.forEach(
+      (section) => section && sectionObserver.observe(section)
+    );
+    workItemsRef.current.forEach((item) => item && workObserver.observe(item));
+    skillItemsRef.current.forEach(
+      (item) => item && skillObserver.observe(item)
+    );
+
+    return () => {
+      sectionsRef.current.forEach(
+        (section) => section && sectionObserver.unobserve(section)
+      );
+      workItemsRef.current.forEach(
+        (item) => item && workObserver.unobserve(item)
+      );
+      skillItemsRef.current.forEach(
+        (item) => item && skillObserver.unobserve(item)
+      );
+    };
+  }, []);
+
+  // Mobile render
   if (isMobile) {
-    // Renderizado en Modo Móvil
     return (
       <>
-        <section id="about" className="CvSection" Section>
+        <section
+          id="about"
+          className="CvSection"
+          ref={(el) => (sectionsRef.current[0] = el)}
+        >
           <h2 className="orange">About</h2>
           <p>
             Multimedia engineer with experience in content production, animation
@@ -30,7 +100,11 @@ const Curriculum = () => {
             professional growth.
           </p>
         </section>
-        <section id="resume" className="CvSection">
+        <section
+          id="resume"
+          className="CvSection"
+          ref={(el) => (sectionsRef.current[1] = el)}
+        >
           <h2 className="orange">Resume PDF</h2>
           <a
             href="https://drive.google.com/file/d/1IehKE1PrvAyW_GlKtuqq7c0j2W3L8mMT/view?usp=drive_link"
@@ -40,95 +114,97 @@ const Curriculum = () => {
             Download
           </a>
         </section>
-        <section id="skills" className="CvSection">
+        <section
+          id="skills"
+          className="CvSection"
+          ref={(el) => (sectionsRef.current[2] = el)}
+        >
           <h2 className="orange">Skills</h2>
-          <div className="CvItems">
-            <div>
-              <span>3D Animation</span>
-              <span>3D Modeling</span>
-              <span>Texturing</span>
-              <span>VFX</span>
-            </div>
-            <div>
-              <span>UV/UI designer</span>
-              <span>Web developer</span>
-            </div>
-            <div>
-              <span>Video Editor</span>
-            </div>
+          <div className="CvItems2 ">
+            {[
+              "3D Animation",
+              "3D Modeling",
+              "Texturing",
+              "VFX",
+              "UV/UI designer",
+              "Web developer",
+              "Video Editor",
+            ].map((skill, i) => (
+              <span
+                key={i}
+                ref={(el) => (skillItemsRef.current[i] = el)}
+                className="CVitem"
+              >
+                {skill}
+              </span>
+            ))}
           </div>
         </section>
-        <section id="software" className="CvSection">
+        <section
+          id="software"
+          className="CvSection"
+          ref={(el) => (sectionsRef.current[3] = el)}
+        >
           <h2 className="orange">Software proficiency</h2>
           <div className="CvItems2">
-            <span className="CVitem">Blender</span>
-            <span className="CVitem">Substance painter</span>
-            <span className="CVitem">ZBrush</span>
-            <span className="CVitem">After Effects</span>
-            <span className="CVitem">Premiere pro</span>
-            <span className="CVitem">Illusdivator</span>
-            <span className="CVitem">Figma </span>
-            <span className="CVitem">HTML </span>
-            <span className="CVitem">CSS </span>
-            <span className="CVitem">Javascript </span>
-            <span className="CVitem">React </span>
+            {[
+              "Blender",
+              "Substance painter",
+              "ZBrush",
+              "After Effects",
+              "Premiere pro",
+              "Illustrator",
+              "Figma",
+              "HTML",
+              "CSS",
+              "Javascript",
+              "React",
+            ].map((software, i) => (
+              <span
+                key={i}
+                ref={(el) => (skillItemsRef.current[i + 7] = el)}
+                className="CVitem"
+              >
+                {software}
+              </span>
+            ))}
           </div>
         </section>
-        <section id="departures" className="CvSection">
+        <section
+          id="departures"
+          className="CvSection"
+          ref={(el) => (sectionsRef.current[4] = el)}
+        >
           <h2 className="orange">Experience</h2>
           <div className="ExpCont">
-            <div className="WorkCont">
-              <h2>Kabato Lab </h2>
-              <h3>3D Modeling 3D Animation</h3>
-              <span className="fontThin">August 2024 - Present (7 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>SmartBeemo</h2>
-              <h3>Video Editor</h3>
-              <span className="fontThin">June 2024 (1 year 6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Kabato Lab</h2>
-              <h3>3D Generalist</h3>
-              <span className="fontThin">June 2024 (1 year 6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Red Point Producciones</h2>
-              <h3>3D Generalist and VFX</h3>
-              <span className="fontThin">February 2023 (1 year 4 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Kabato Lab</h2>
-              <h3>3D Animator</h3>
-              <span className="fontThin">December 2022 (6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>CACUMEN creative studio</h2>
-              <h3> 2D and 3D Animator</h3>
-              <span className="fontThin">2022 (6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>BTI Laboratory of prototyping</h2>
-              <h3>UV/UI Designer</h3>
-              <span className="fontThin">March 2022 (7 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Universidad Autónoma de Occidente</h2>
-              <h3>Production Assistant</h3>
-              <span className="fontThin">2021 (1 year 9 months)</span>
-            </div>
+            {" "}
+            {experienceData.map((exp, i) => (
+              <div
+                key={i}
+                className="WorkCont"
+                ref={(el) => (workItemsRef.current[i] = el)}
+              >
+                <h2>{exp.company}</h2>
+                <h3>{exp.position}</h3>
+                <span className="fontThin">{exp.duration}</span>
+              </div>
+            ))}
           </div>
         </section>
       </>
     );
   }
 
-  // Renderizado en Modo Escritorio (cuatro columnas)
+  // Desktop render
   return (
     <>
       <div className="CvRow">
         <div>
-          <section id="profile" className="CvSection">
+          <section
+            id="profile"
+            className="CvSection"
+            ref={(el) => (sectionsRef.current[0] = el)}
+          >
             <div className="JCCenter">
               <img
                 src={profileImg}
@@ -169,7 +245,11 @@ const Curriculum = () => {
               </svg>
             </a>
           </section>
-          <section id="resume" className="CvSection">
+          <section
+            id="resume"
+            className="CvSection"
+            ref={(el) => (sectionsRef.current[1] = el)}
+          >
             <h2 className="orange">Resume PDF</h2>
             <a
               href="https://drive.google.com/file/d/1IehKE1PrvAyW_GlKtuqq7c0j2W3L8mMT/view?usp=drive_link"
@@ -179,43 +259,69 @@ const Curriculum = () => {
               Download
             </a>
           </section>
-          <section id="skills" className="CvSection">
+          <section
+            id="skills"
+            className="CvSection"
+            ref={(el) => (sectionsRef.current[2] = el)}
+          >
             <h2 className="orange">Skills</h2>
-            <div className="CvItems">
-              <div>
-                <span>3D Animation</span>
-                <span>3D Modeling</span>
-                <span>Texturing</span>
-                <span>VFX</span>
-              </div>
-              <div>
-                <span>UV/UI designer</span>
-                <span>Web developer</span>
-              </div>
-              <div>
-                <span>Video Editor</span>
-              </div>
+            <div className="CvItems2">
+              {[
+                "3D Animation",
+                "3D Modeling",
+                "Texturing",
+                "VFX",
+                "UV/UI designer",
+                "Web developer",
+                "Video Editor",
+              ].map((skill, i) => (
+                <span
+                  key={i}
+                  ref={(el) => (skillItemsRef.current[i] = el)}
+                  className="CVitem"
+                >
+                  {skill}
+                </span>
+              ))}
             </div>
           </section>
-          <section id="software" className="CvSection">
+          <section
+            id="software"
+            className="CvSection"
+            ref={(el) => (sectionsRef.current[3] = el)}
+          >
             <h2 className="orange">Software proficiency</h2>
             <div className="CvItems2">
-              <span className="CVitem">Blender</span>
-              <span className="CVitem">Substance painter</span>
-              <span className="CVitem">ZBrush</span>
-              <span className="CVitem">After Effects</span>
-              <span className="CVitem">Premiere pro</span>
-              <span className="CVitem">Illusdivator</span>
-              <span className="CVitem">Figma </span>
-              <span className="CVitem">HTML </span>
-              <span className="CVitem">CSS </span>
-              <span className="CVitem">Javascript </span>
-              <span className="CVitem">React </span>
+              {[
+                "Blender",
+                "Substance painter",
+                "ZBrush",
+                "After Effects",
+                "Premiere pro",
+                "Illustrator",
+                "Figma",
+                "HTML",
+                "CSS",
+                "Javascript",
+                "React",
+              ].map((software, i) => (
+                <span
+                  key={i}
+                  ref={(el) => (skillItemsRef.current[i + 7] = el)}
+                  className="CVitem"
+                >
+                  {software}
+                </span>
+              ))}
             </div>
           </section>
         </div>
         <div>
-          <section id="about" className="CvSection" Section>
+          <section
+            id="about"
+            className="CvSection"
+            ref={(el) => (sectionsRef.current[4] = el)}
+          >
             <h2 className="orange">About</h2>
             <p>
               Multimedia engineer with experience in content production,
@@ -229,53 +335,25 @@ const Curriculum = () => {
               seek new opportunities for professional growth.
             </p>
           </section>
-          <section id="departures" className="CvSection">
+          <section
+            id="departures"
+            className="CvSection"
+            ref={(el) => (sectionsRef.current[5] = el)}
+          >
             <h2 className="orange">Experience</h2>
             <div className="ExpCont">
-              <div className="WorkCont">
-                <h2>Kabato Lab </h2>
-                <h3>3D Modeling 3D Animation</h3>
-                <span className="fontThin">
-                  August 2024 - Present (7 months)
-                </span>
-              </div>
-              <div className="WorkCont">
-                <h2>SmartBeemo</h2>
-                <h3>Video Editor</h3>
-                <span className="fontThin">June 2024 (1 year 6 months)</span>
-              </div>
-              <div className="WorkCont">
-                <h2>Kabato Lab</h2>
-                <h3>3D Generals</h3>
-                <span className="fontThin">June 2024 (1 year 6 months)</span>
-              </div>
-              <div className="WorkCont">
-                <h2>Freeforce</h2>
-                <h3>3D Generals and VFX</h3>
-                <span className="fontThin">
-                  February 2023 (1 year 4 months)
-                </span>
-              </div>
-              <div className="WorkCont">
-                <h2>Kabato Lab</h2>
-                <h3>3D Animator</h3>
-                <span className="fontThin">December 2022 (6 months)</span>
-              </div>
-              <div className="WorkCont">
-                <h2>CACUMEN creative studio</h2>
-                <h3>Animator 2D y 3D</h3>
-                <span className="fontThin">2022 (6 months)</span>
-              </div>
-              <div className="WorkCont">
-                <h2>BT1 Laboratoire de Prototipado</h2>
-                <h3>UV/UI Designer</h3>
-                <span className="fontThin">March 2022 (7 months)</span>
-              </div>
-              <div className="WorkCont">
-                <h2>Universidad Autónoma de Occidente</h2>
-                <h3>Auxiliar de producción</h3>
-                <span className="fontThin">2021 (1 year 9 months)</span>
-              </div>
+              {" "}
+              {experienceData.map((exp, i) => (
+                <div
+                  key={i}
+                  className="WorkCont"
+                  ref={(el) => (workItemsRef.current[i] = el)}
+                >
+                  <h2>{exp.company}</h2>
+                  <h3>{exp.position}</h3>
+                  <span className="fontThin">{exp.duration}</span>
+                </div>
+              ))}
             </div>
           </section>
         </div>
@@ -283,4 +361,88 @@ const Curriculum = () => {
     </>
   );
 };
+
+/** 
+            <div className="WorkCont">
+              <h2>Kabato Lab </h2>
+              <h3>3D Modeling 3D Animation</h3>
+              <span className="fontThin">August 2024 - Present (7 months)</span>
+            </div>
+            <div className="WorkCont">
+              <h2>SmartBeemo</h2>
+              <h3>Video Editor</h3>
+              <span className="fontThin">June 2024 (1 year 6 months)</span>
+            </div>
+            <div className="WorkCont">
+              <h2>Kabato Lab</h2>
+              <h3>3D Generalist</h3>
+              <span className="fontThin">June 2024 (1 year 6 months)</span>
+            </div>
+            <div className="WorkCont">
+              <h2>Red Point Producciones</h2>
+              <h3>3D Generalist and VFX</h3>
+              <span className="fontThin">February 2023 (1 year 4 months)</span>
+            </div>
+            <div className="WorkCont">
+              <h2>Kabato Lab</h2>
+              <h3>3D Animator</h3>
+              <span className="fontThin">December 2022 (6 months)</span>
+            </div>
+            <div className="WorkCont">
+              <h2>CACUMEN creative studio</h2>
+              <h3> 2D and 3D Animator</h3>
+              <span className="fontThin">2022 (6 months)</span>
+            </div>
+            <div className="WorkCont">
+              <h2>BTI Laboratory of prototyping</h2>
+              <h3>UV/UI Designer</h3>
+              <span className="fontThin">March 2022 (7 months)</span>
+            </div>
+            <div className="WorkCont">
+              <h2>Universidad Autónoma de Occidente</h2>
+              <h3>Production Assistant</h3>
+              <span className="fontThin">2021 (1 year 9 months)</span>
+            </div> */
+const experienceData = [
+  {
+    company: "Kabato Lab",
+    position: "3D Modeling 3D Animation",
+    duration: "August 2024 - Present (7 months)",
+  },
+  {
+    company: "SmartBeemo",
+    position: "SR Video Editor",
+    duration: "June 2024 (1 year 6 months)",
+  },
+  {
+    company: "Kabato Lab",
+    position: "3D Generalist",
+    duration: "June 2024 (1 year 6 months)",
+  },
+  {
+    company: "Red Point Producciones",
+    position: "3D Generalist and VFX",
+    duration: "February 2023 (1 year 4 months)",
+  },
+  {
+    company: "Kabato Lab",
+    position: "3D Animator",
+    duration: "December 2022 (6 months)",
+  },
+  {
+    company: "CACUMEN creative studio",
+    position: "2D and 3D Animator",
+    duration: "2022 (6 months)",
+  },
+  {
+    company: "BTI Laboratory of prototyping",
+    position: "UV/UI Designer",
+    duration: "March 2022 (7 months)",
+  },
+  {
+    company: "Universidad Autónoma de Occidente",
+    position: "Production Assistant",
+    duration: "2021 (1 year 9 months)",
+  },
+];
 export default Curriculum;
