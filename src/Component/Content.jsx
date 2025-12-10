@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Content = ({ activeCategory }) => {
   const items = [
@@ -46,7 +46,7 @@ const Content = ({ activeCategory }) => {
     },
     {
       id: 4,
-      category: "Character",
+      category: "Characters", // Corregido
       title: "Sculpture process",
       type: "video",
       path: "/portfolioIMG/Characters/Escultura Zombie Estilizado.mp4",
@@ -172,15 +172,15 @@ const Content = ({ activeCategory }) => {
         {[0, 1, 2, 3].map((colIndex) => (
           <div key={colIndex} className="column">
             {filteredItems
-              .filter((_, index) => index % 4 === colIndex) // Distribute items across 4 columns
+              .filter((_, index) => index % 4 === colIndex)
               .map((item) => (
                 <div key={item.id} className="">
                   {item.type === "video" && (
                     <video controls src={item.path}></video>
                   )}
-                  <a href={item.link} target="_blank">
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.type === "img" && (
-                      <img className="img" src={item.path} />
+                      <img className="img" src={item.path} alt={item.title} />
                     )}
                   </a>
                 </div>
@@ -191,4 +191,5 @@ const Content = ({ activeCategory }) => {
     </>
   );
 };
+
 export default Content;
