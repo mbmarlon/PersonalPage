@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Content from "./Content.jsx";
+import ContentDB from "./ContentDB.jsx";
 
 const Category = () => {
   // Leer parámetro de la URL actual al iniciar
@@ -92,7 +93,7 @@ const Category = () => {
         ))}
       </div>
 
-      <Content activeCategory={activeCategory} />
+      <ContentDB activeCategory={activeCategory} />
     </>
   );
 };

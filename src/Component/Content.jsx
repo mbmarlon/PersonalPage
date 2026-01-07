@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
+/* firebase */
+//import { testCreateDoc, testReadDocs } from "../firebase/firestore";
+
 const Content = ({ activeCategory }) => {
+  useEffect(() => {
+    console.log("Hook funcionando");
+  }, []);
+
   const items = [
     {
       id: 1,
