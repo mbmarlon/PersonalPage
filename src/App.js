@@ -12,3 +12,20 @@ export default function App() {
     </div>
   );
 }
+
+/** 
+ * 
+ * Migraci[on de DB]
+import { useEffect } from "react";
+import { seedPortfolio } from "./migrations/seedPortfolio";
+
+function App() {
+  useEffect(() => {
+    seedPortfolio();
+  }, []);
+
+  return <h1>Migrando portfolio…</h1>;
+}
+
+export default App;
+*/
