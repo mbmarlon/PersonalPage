@@ -1,39 +1,34 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import "./styles.css";
-import Header from "./Component/Header.jsx";
-import Nav from "./Component/Nav.jsx";
-import Footer from "./Component/Footer.jsx";
-import Admin from "./Admin/Admin.jsx";
+import Header from "./Component/Header";
+import Nav from "./Component/Nav";
+import Footer from "./Component/Footer";
+import Admin from "./admin/Admin";
 
-export default function App() {
+function AppContent() {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
+
   return (
-    <div className="App">
-      <Header />
-      <Nav />
-      <Footer />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <>
+      {/* 🌍 SOLO EN PORTAFOLIO */}
+      {!isAdmin && <Header />}
+      {!isAdmin && <Nav />}
+
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+
+      {!isAdmin && <Footer />}
+    </>
   );
 }
 
-/** 
- * 
- * Migraci[on de DB]
-import { useEffect } from "react";
-import { seedPortfolio } from "./migrations/seedPortfolio";
-
-function App() {
-  useEffect(() => {
-    seedPortfolio();
-  }, []);
-
-  return <h1>Migrando portfolio…</h1>;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
 }
-
-export default App;
-*/
