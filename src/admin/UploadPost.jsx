@@ -28,22 +28,31 @@ export default function Post() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="formCont" onSubmit={handleSubmit}>
       <input
+        className="FrmInput"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Título"
       />
 
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select
+        className="FrmInput"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
         <option>ADS</option>
         <option>Animation</option>
         <option>VFX</option>
       </select>
 
-      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+      <input
+        className=""
+        type="file"
+        onChange={(e) => setFile(e.target.files[0])}
+      />
 
-      <button disabled={uploading}>
+      <button className="button" disabled={uploading}>
         {uploading ? "Subiendo..." : "Publicar"}
       </button>
     </form>

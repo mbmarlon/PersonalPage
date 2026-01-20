@@ -10,8 +10,8 @@ export default function Admin() {
   // 🔐 NO autenticado
   if (!user) {
     return (
-      <div>
-        <h2>Admin login</h2>
+      <div className="admin">
+        <h1>Admin login</h1>
         <button onClick={login}>Iniciar sesión con Google</button>
       </div>
     );
@@ -19,10 +19,12 @@ export default function Admin() {
 
   // ✅ Autenticado
   return (
-    <div>
-      <h2>Admin Panel</h2>
+    <div className="admin">
+      <h1>Admin Panel</h1>
       <p>{user.email}</p>
-      <button onClick={logout}>Cerrar sesión</button>
+      <button className="button" onClick={logout}>
+        Cerrar sesión
+      </button>
 
       <Post />
     </div>
