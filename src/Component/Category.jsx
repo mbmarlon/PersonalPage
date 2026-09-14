@@ -5,12 +5,12 @@ export default function Category() {
   // 🔹 Categorías (label = visual / value = lógica)
   const categories = [
     { label: "All", value: "All" },
-    { label: "Characters", value: "Characters" },
-    { label: "VFX", value: "VFX" },
-    { label: "Animation", value: "Animation" },
     { label: "UX/UI", value: "UX-UI" },
-    { label: "ADS", value: "ADS" },
     { label: "WEB", value: "WEB" },
+    { label: "Animation", value: "Animation" },
+    { label: "VFX", value: "VFX" },
+    { label: "Characters", value: "Characters" },
+    { label: "ADS", value: "ADS" },
   ];
 
   // 🔹 Leer categoría desde URL
