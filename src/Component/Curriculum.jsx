@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import profileImg from "./Profile.jpeg";
+import { TAGLINE, socialLinks } from "./profileData";
+
 const Curriculum = () => {
   /* Responsive */
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
@@ -61,388 +63,360 @@ const Curriculum = () => {
       (section) => section && sectionObserver.observe(section)
     );
     workItemsRef.current.forEach((item) => item && workObserver.observe(item));
-    skillItemsRef.current.forEach(
-      (item) => item && skillObserver.observe(item)
-    );
+    skillItemsRef.current.forEach((item) => item && skillObserver.observe(item));
 
     return () => {
-      sectionsRef.current.forEach(
-        (section) => section && sectionObserver.unobserve(section)
-      );
-      workItemsRef.current.forEach(
-        (item) => item && workObserver.unobserve(item)
-      );
-      skillItemsRef.current.forEach(
-        (item) => item && skillObserver.unobserve(item)
-      );
+      sectionObserver.disconnect();
+      workObserver.disconnect();
+      skillObserver.disconnect();
     };
-  }, []);
+  }, [isMobile]);
+
+  /* The sections below are shared by the mobile and the desktop render.
+     Each one receives the slot it occupies in sectionsRef so the observer
+     keeps animating them in reading order. */
+
+  const renderProfile = (i) => (
+    <section
+      id="profile"
+      className="CvSection"
+      ref={(el) => (sectionsRef.current[i] = el)}
+    >
+      <div className="JCCenter">
+        <img src={profileImg} alt="Marlon Marin Barco" className="imgProfile" />
+        <h1 className="white">Marlon Marin Barco</h1>
+        <p className="TxCenter">{TAGLINE}</p>
+      </div>
+      {socialLinks.map(({ href, label, path }) => (
+        <a
+          key={label}
+          href={href}
+          className="icon"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="26"
+            height="26"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d={path} />
+          </svg>
+        </a>
+      ))}
+    </section>
+  );
+
+  const renderAbout = (i) => (
+    <section
+      id="about"
+      className="CvSection"
+      ref={(el) => (sectionsRef.current[i] = el)}
+    >
+      <h2 className="orange">About</h2>
+      <p>{ABOUT}</p>
+    </section>
+  );
+
+  const renderResume = (i) => (
+    <section
+      id="resume"
+      className="CvSection"
+      ref={(el) => (sectionsRef.current[i] = el)}
+    >
+      <h2 className="orange">Resume PDF</h2>
+      <a
+        href={RESUME_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="active"
+      >
+        Download
+      </a>
+    </section>
+  );
+
+  const renderSkills = (i) => {
+    // Running index so every chip across every group gets its own ref slot.
+    let chip = 0;
+
+    return (
+      <section
+        id="skills"
+        className="CvSection"
+        ref={(el) => (sectionsRef.current[i] = el)}
+      >
+        <h2 className="orange">Skills</h2>
+        {skillGroups.map((group) => (
+          <div key={group.title} className="SkillGroup">
+            <h3 className="SkillGroupTitle">{group.title}</h3>
+            <div className="CvItems2">
+              {group.items.map((item) => {
+                const slot = chip++;
+                return (
+                  <span
+                    key={item}
+                    ref={(el) => (skillItemsRef.current[slot] = el)}
+                    className="CVitem"
+                  >
+                    {item}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </section>
+    );
+  };
+
+  const renderExperience = (i) => (
+    <section
+      id="experience"
+      className="CvSection"
+      ref={(el) => (sectionsRef.current[i] = el)}
+    >
+      <h2 className="orange">Experience</h2>
+      <div className="ExpCont">
+        {experienceData.map((exp, index) => (
+          <div
+            key={`${exp.company}-${exp.duration}`}
+            className="WorkCont"
+            ref={(el) => (workItemsRef.current[index] = el)}
+          >
+            <h2>{exp.company}</h2>
+            <h3>{exp.position}</h3>
+            <span className="fontThin">{exp.duration}</span>
+            <ul className="WorkHighlights">
+              {exp.highlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+
+  const renderProjects = (i) => (
+    <section
+      id="featured"
+      className="CvSection"
+      ref={(el) => (sectionsRef.current[i] = el)}
+    >
+      <h2 className="orange">Featured Projects</h2>
+      {projectsData.map((project) => (
+        <div key={project.title} className="ListCont">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+        </div>
+      ))}
+    </section>
+  );
+
+  const renderEducation = (i) => (
+    <section
+      id="education"
+      className="CvSection"
+      ref={(el) => (sectionsRef.current[i] = el)}
+    >
+      <h2 className="orange">Education &amp; Certifications</h2>
+      {educationData.map((item) => (
+        <div key={item.title} className="ListCont">
+          <h3>{item.title}</h3>
+          {item.org && <span className="fontThin">{item.org}</span>}
+          {item.duration && <span className="fontThin">{item.duration}</span>}
+        </div>
+      ))}
+    </section>
+  );
 
   // Mobile render
   if (isMobile) {
     return (
       <>
-        <section
-          id="about"
-          className="CvSection"
-          ref={(el) => (sectionsRef.current[0] = el)}
-        >
-          <h2 className="orange">About</h2>
-          <p>
-            Multimedia engineer with experience in content production, animation
-            and 3D modeling, user interface design and web development. My main
-            focus is on creating high-quality content that engages and retains
-            audiences. I have worked on animation and 3D modeling projects for
-            the entertainment and advertising industries, as well as on user
-            interface design and website development for companies. I am
-            passionate about digital art and new technologies, which drives me
-            to constantly stay updated and seek new opportunities for
-            professional growth.
-          </p>
-        </section>
-        <section
-          id="resume"
-          className="CvSection"
-          ref={(el) => (sectionsRef.current[1] = el)}
-        >
-          <h2 className="orange">Resume PDF</h2>
-          <a
-            href="https://drive.google.com/file/d/1IehKE1PrvAyW_GlKtuqq7c0j2W3L8mMT/view?usp=drive_link"
-            download
-            className="active"
-          >
-            Download
-          </a>
-        </section>
-        <section
-          id="skills"
-          className="CvSection"
-          ref={(el) => (sectionsRef.current[2] = el)}
-        >
-          <h2 className="orange">Skills</h2>
-          <div className="CvItems2 ">
-            {[
-              "3D Animation",
-              "3D Modeling",
-              "Texturing",
-              "VFX",
-              "UV/UI designer",
-              "Web developer",
-              "Video Editor",
-            ].map((skill, i) => (
-              <span
-                key={i}
-                ref={(el) => (skillItemsRef.current[i] = el)}
-                className="CVitem"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
-        <section
-          id="software"
-          className="CvSection"
-          ref={(el) => (sectionsRef.current[3] = el)}
-        >
-          <h2 className="orange">Software proficiency</h2>
-          <div className="CvItems2">
-            {[
-              "Blender",
-              "Substance painter",
-              "ZBrush",
-              "After Effects",
-              "Premiere pro",
-              "Illustrator",
-              "Figma",
-              "HTML",
-              "CSS",
-              "Javascript",
-              "React",
-            ].map((software, i) => (
-              <span
-                key={i}
-                ref={(el) => (skillItemsRef.current[i + 7] = el)}
-                className="CVitem"
-              >
-                {software}
-              </span>
-            ))}
-          </div>
-        </section>
-        <section
-          id="departures"
-          className="CvSection"
-          ref={(el) => (sectionsRef.current[4] = el)}
-        >
-          <h2 className="orange">Experience</h2>
-          <div className="ExpCont">
-            {" "}
-            {experienceData.map((exp, i) => (
-              <div
-                key={i}
-                className="WorkCont"
-                ref={(el) => (workItemsRef.current[i] = el)}
-              >
-                <h2>{exp.company}</h2>
-                <h3>{exp.position}</h3>
-                <span className="fontThin">{exp.duration}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+        {renderAbout(0)}
+        {renderResume(1)}
+        {renderSkills(2)}
+        {renderExperience(3)}
+        {renderProjects(4)}
+        {renderEducation(5)}
       </>
     );
   }
 
   // Desktop render
   return (
-    <>
-      <div className="CvRow">
-        <div>
-          <section
-            id="profile"
-            className="CvSection"
-            ref={(el) => (sectionsRef.current[0] = el)}
-          >
-            <div className="JCCenter">
-              <img
-                src={profileImg}
-                alt="profile image"
-                className="imgProfile"
-              />
-              <h1 className="white">Marlon Marin Barco</h1>
-              <p className="text-gray-300 text-sm mb-4">
-                Multimedia engineering, UX/UI, 3D animator, 3D generalist, VFX
-                artist and web developer.
-              </p>
-            </div>
-            <a href="https://www.instagram.com/media_arte/" className="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="26"
-                height="26"
-                fill="currentColor"
-                class="bi bi-instagram"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
-              </svg>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/marlon-marin-barco-3841a9190/"
-              className="icon"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="26"
-                height="26"
-                fill="currentColor"
-                class="bi bi-linkedin"
-                viewBox="0 0 16 16"
-              >
-                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
-              </svg>
-            </a>
-          </section>
-          <section
-            id="resume"
-            className="CvSection"
-            ref={(el) => (sectionsRef.current[1] = el)}
-          >
-            <h2 className="orange">Resume PDF</h2>
-            <a
-              href="https://drive.google.com/file/d/1IehKE1PrvAyW_GlKtuqq7c0j2W3L8mMT/view?usp=drive_link"
-              download
-              className="active"
-            >
-              Download
-            </a>
-          </section>
-          <section
-            id="skills"
-            className="CvSection"
-            ref={(el) => (sectionsRef.current[2] = el)}
-          >
-            <h2 className="orange">Skills</h2>
-            <div className="CvItems2">
-              {[
-                "3D Animation",
-                "3D Modeling",
-                "Texturing",
-                "VFX",
-                "UV/UI designer",
-                "Web developer",
-                "Video Editor",
-              ].map((skill, i) => (
-                <span
-                  key={i}
-                  ref={(el) => (skillItemsRef.current[i] = el)}
-                  className="CVitem"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </section>
-          <section
-            id="software"
-            className="CvSection"
-            ref={(el) => (sectionsRef.current[3] = el)}
-          >
-            <h2 className="orange">Software proficiency</h2>
-            <div className="CvItems2">
-              {[
-                "Blender",
-                "Substance painter",
-                "ZBrush",
-                "After Effects",
-                "Premiere pro",
-                "Illustrator",
-                "Figma",
-                "HTML",
-                "CSS",
-                "Javascript",
-                "React",
-              ].map((software, i) => (
-                <span
-                  key={i}
-                  ref={(el) => (skillItemsRef.current[i + 7] = el)}
-                  className="CVitem"
-                >
-                  {software}
-                </span>
-              ))}
-            </div>
-          </section>
-        </div>
-        <div>
-          <section
-            id="about"
-            className="CvSection"
-            ref={(el) => (sectionsRef.current[4] = el)}
-          >
-            <h2 className="orange">About</h2>
-            <p>
-              Multimedia engineer with experience in content production,
-              animation and 3D modeling, user interface design and web
-              development. My main focus is on creating high-quality content
-              that engages and retains audiences. I have worked on animation and
-              3D modeling projects for the entertainment and advertising
-              industries, as well as on user interface design and website
-              development for companies. I am passionate about digital art and
-              new technologies, which drives me to constantly stay updated and
-              seek new opportunities for professional growth.
-            </p>
-          </section>
-          <section
-            id="departures"
-            className="CvSection"
-            ref={(el) => (sectionsRef.current[5] = el)}
-          >
-            <h2 className="orange">Experience</h2>
-            <div className="ExpCont">
-              {" "}
-              {experienceData.map((exp, i) => (
-                <div
-                  key={i}
-                  className="WorkCont"
-                  ref={(el) => (workItemsRef.current[i] = el)}
-                >
-                  <h2>{exp.company}</h2>
-                  <h3>{exp.position}</h3>
-                  <span className="fontThin">{exp.duration}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
+    <div className="CvRow">
+      <div>
+        {renderProfile(0)}
+        {renderResume(1)}
+        {renderSkills(2)}
       </div>
-    </>
+      <div>
+        {renderAbout(3)}
+        {renderExperience(4)}
+        {renderProjects(5)}
+        {renderEducation(6)}
+      </div>
+    </div>
   );
 };
 
-/** 
-            <div className="WorkCont">
-              <h2>Kabato Lab </h2>
-              <h3>3D Modeling 3D Animation</h3>
-              <span className="fontThin">August 2024 - Present (7 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>SmartBeemo</h2>
-              <h3>Video Editor</h3>
-              <span className="fontThin">June 2024 (1 year 6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Kabato Lab</h2>
-              <h3>3D Generalist</h3>
-              <span className="fontThin">June 2024 (1 year 6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Red Point Producciones</h2>
-              <h3>3D Generalist and VFX</h3>
-              <span className="fontThin">February 2023 (1 year 4 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Kabato Lab</h2>
-              <h3>3D Animator</h3>
-              <span className="fontThin">December 2022 (6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>CACUMEN creative studio</h2>
-              <h3> 2D and 3D Animator</h3>
-              <span className="fontThin">2022 (6 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>BTI Laboratory of prototyping</h2>
-              <h3>UV/UI Designer</h3>
-              <span className="fontThin">March 2022 (7 months)</span>
-            </div>
-            <div className="WorkCont">
-              <h2>Universidad Autónoma de Occidente</h2>
-              <h3>Production Assistant</h3>
-              <span className="fontThin">2021 (1 year 9 months)</span>
-            </div> */
+const ABOUT =
+  "Multimedia Engineer, UX/UI Designer and Front-End Developer working at the intersection of interactive design, programming and 3D art. I specialise in agile methodologies, user research, React.js component development and immersive experiences (WebGL/Unity). I was part of the post-production team on a Latin Grammy winning project, and I have a solid track record of streamlining workflows between creative and technical teams.";
+
+const RESUME_URL =
+  "https://drive.google.com/file/d/1IehKE1PrvAyW_GlKtuqq7c0j2W3L8mMT/view?usp=drive_link";
+
+const skillGroups = [
+  {
+    title: "UX/UI & Product Design",
+    items: [
+      "Figma",
+      "Adobe XD",
+      "Design Systems",
+      "Wireframing",
+      "Prototyping",
+      "Usability Testing",
+      "Diegetic UI",
+      "User Research",
+    ],
+  },
+  {
+    title: "Front-End Development",
+    items: [
+      "JavaScript (ES6+)",
+      "React.js",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS",
+      "Web Animation",
+      "Git",
+      "GitHub",
+    ],
+  },
+  {
+    title: "3D, VFX & Visual Experiences",
+    items: [
+      "Blender",
+      "Unity",
+      "WebGL (learning)",
+      "Modeling",
+      "Digital Sculpting",
+      "Low-Poly Optimization",
+      "Motion Graphics",
+      "Rigging",
+      "After Effects",
+    ],
+  },
+  {
+    title: "Integration & Hardware",
+    items: [
+      "Arduino",
+      "IoT",
+      "Java",
+      "Python",
+      "Databases",
+      "Cross-functional teamwork",
+    ],
+  },
+];
+
 const experienceData = [
   {
-    company: "Kabato Lab",
-    position: "3D Modeling 3D Animation",
-    duration: "August 2024 - Present (7 months)",
+    company: "Alta Elite",
+    position: "UX/UI Designer & Multimedia Designer",
+    duration: "March 2025 - Present · Remote",
+    highlights: [
+      "Lead the UX/UI design of innovation apps and digital wallets.",
+      "Build and maintain scalable design systems, keeping hand-off and communication with the front-end team smooth.",
+      "Integrate dynamic visuals and marketing narratives that enrich the interactive experience.",
+    ],
   },
   {
-    company: "SmartBeemo",
-    position: "SR Video Editor",
-    duration: "June 2024 (1 year 6 months)",
+    company: "Redpoint Producciones",
+    position: "VFX & 3D Artist",
+    duration: "September 2024 · Remote",
+    highlights: [
+      "Part of the post-production and VFX team for Alejandro Sanz’s “Palmeras en el jardín”, winner of the Latin Grammy for Record of the Year.",
+      "Worked closely with the direction and editing teams to integrate high-fidelity 3D elements and visual effects under international music industry standards.",
+    ],
   },
   {
-    company: "Kabato Lab",
-    position: "3D Generalist",
-    duration: "June 2024 (1 year 6 months)",
+    company: "Kaleido Lab",
+    position: "Multimedia Engineer (UX/UI & 3D)",
+    duration: "August 2022 - December 2022 · Colombia",
+    highlights: [
+      "Led diegetic UI design for video games, pairing usability principles with narrative immersion and 3D rendering.",
+      "Owned rendering, optimization and cinematic assembly in game engines, connecting gameplay with intuitive interactive design.",
+    ],
   },
   {
-    company: "Red Point Producciones",
-    position: "3D Generalist and VFX",
-    duration: "February 2023 (1 year 4 months)",
+    company: "Cacumen Post S.A.S",
+    position: "2D/3D Animator, VFX Artist & UI Designer",
+    duration: "March 2022 - October 2022 · Colombia",
+    highlights: [
+      "Ran full 3D production pipelines, character animation and high-end visual effects.",
+      "Designed user interfaces for informational platforms and digital experiences at government and institutional events.",
+    ],
   },
   {
-    company: "Kabato Lab",
-    position: "3D Animator",
-    duration: "December 2022 (6 months)",
-  },
-  {
-    company: "CACUMEN creative studio",
-    position: "2D and 3D Animator",
-    duration: "2022 (6 months)",
-  },
-  {
-    company: "BTI Laboratory of prototyping",
-    position: "UV/UI Designer",
-    duration: "March 2022 (7 months)",
+    company: "BTiLab - Rebus Technology S.A.S",
+    position: "Project Manager & UX Designer",
+    duration: "July 2021 - May 2022 · Colombia",
+    highlights: [
+      "Managed the lifecycle of digital projects from discovery through delivery, aligning client needs with business goals.",
+      "Designed digital products and validated their usability through user testing and semi-structured interviews, reducing interaction friction.",
+    ],
   },
   {
     company: "Universidad Autónoma de Occidente",
-    position: "Production Assistant",
-    duration: "2021 (1 year 9 months)",
+    position: "Multimedia Production Assistant",
+    duration: "January 2020 - September 2021 · Cali, Colombia",
+    highlights: [
+      "Produced animation, motion graphics and visual effects supporting the digitisation of more than a hundred courses during the shift to remote education.",
+    ],
   },
 ];
+
+const projectsData = [
+  {
+    title: "Local IoT System with Web Interface",
+    description:
+      "End-to-end local network connecting Arduino hardware to a custom Java web server and database, unifying physical data collection with digital visualisation across front-end, back-end and hardware.",
+  },
+  {
+    title: "Interactive Front-End Portfolio",
+    description:
+      "Responsive single page application built with React and advanced CSS animation, designed to showcase UX/UI and 3D work at high fidelity with optimised performance.",
+  },
+];
+
+const educationData = [
+  {
+    title: "Multimedia Engineering",
+    org: "Universidad Autónoma de Occidente",
+    duration: "2015 - 2021",
+  },
+  {
+    title: "3D Animation Specialisation",
+    org: "AnimationGym",
+    duration: "Nov 2021 - Jun 2022",
+  },
+  {
+    title: "Professional Blender & Game Production Course",
+    org: "",
+    duration: "",
+  },
+  {
+    title: "Asynchronous JavaScript · Professional Scrum",
+    org: "Platzi",
+    duration: "2023",
+  },
+];
+
 export default Curriculum;
